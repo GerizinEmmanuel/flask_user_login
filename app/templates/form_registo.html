@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+{%block conteudo%}
+<h3>Registo de Utilizador</h3>
+<form action="{{url_for('registo')}}" novalidate method="POST">
+
+    {{form.csrf_token}}
+
+    <!--Campo para introduzir nome-->
+    <div class="mb-3">
+        <label for="input-nome" class="form-label">Nome</label>
+    
+        {{form.name(class="form-control",placeholder="Nome")}}
+        
+        {%if form.errors.name%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.name%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+    </div>
+    <!--Campo para introduzir e-mail-->
+    <div class="mb-3">
+        <label for="input-email" class="form-label">E-mail</label>
+        {{form.email(class="form-control",placeholder="E-mail")}}
+        {%if form.errors.email%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.email%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+    </div>
+    <!--Campo para introduzir cell-->
+    <div class="mb-3">
+        <label for="input-telefone" class="form-label">Número de telefone</label>
+        {{form.telefone(id="input-telefone",class="form-control",placeholder="Telefone")}}
+        {%if form.errors.telefone%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.telefone%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+    </div>
+    <!--Campo para introduzir username-->
+    <div class="mb-3">
+        <label for="input-username" class="form-label">Username</label>
+        {{form.username(class="form-control",placeholder="Username")}}
+        {%if form.errors.username%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.username%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+    </div>
+    <!--Campo para introduzir password-->
+    <div class="row mb-3">
+        <label for="input-password1" class="form-label">Palavra-passe</label>
+        <div class="col">
+            {{form.password(class="form-control",placeholder="Digita uma Palavra-passe")}}
+            {%if form.errors.password%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.password%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+        </div>
+        <!--Campo para introduzir confirmação da password-->
+        <div class="col">
+            {{form.confirm(class="form-control",placeholder="Confirma a Palavra-passe")}}
+            {%if form.errors.confirm%}
+            <div class="alert alert-danger" role="alert">
+                {%for error in form.errors.confirm%}
+                    <li>{{error}}</li>
+                {%endfor%}
+            </div>
+        {%endif%}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Registar</button>
+      </div>
+</form>
+
+{%endblock%}

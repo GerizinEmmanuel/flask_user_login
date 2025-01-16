@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{%block titulo%}{{super()}} - Página Inicial{%endblock%}
+
+
+{%block conteudo%}
+{%if current_user.is_authenticated%}
+  <h1>Bem-vindo, {{current_user.name}}!</h1>
+  {%include 'dados_utilizador.html'%}
+  <div class="d-flex">
+    <div class="">
+      <a class="btn btn-primary" href="{{url_for('atualizar_utilizador',id_utilizador=current_user.id)}}" role="button">Editar dados</a>
+    </div>
+    <div class="">
+      <a class="btn btn-danger" href="{{url_for('apagar_utilizador',id_utilizador=current_user.id)}}" role="button">Apagar conta</a>
+    </div>
+  </div> 
+{%else%}
+  <div class="card-body">
+      <h1 class="card-title">Bem-vindo(a) ao Toilter!</h1>
+      <p class="card-text">Uma rede social perfeita para ti.</p>
+      <a href="{{url_for('registo')}}" class="btn btn-primary">Regista-te</a>
+      <a class="btn btn-primary" href="{{url_for('login')}}">Inicia Sessão</a>
+    </div>
+  </div>
+{%endif%}
+{%endblock%}
