@@ -2,7 +2,7 @@ from app import app, db
 from flask import render_template, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
-from app.models.forms import LoginForm,SignupForm,EditForm,OTPForm,PasswordForm,UsernameForm
+from app.models.forms import LoginForm,SignupForm,EditForm,OTPForm,PasswordForm,UsernameForm,InputPassword
 from app.models import User
 from app.utils.otp import gerar_codigo
 
@@ -144,15 +144,21 @@ def atualizar_utilizador(id_utilizador):
 def apagar_utilizador(id_utilizador,confirmar):
     if confirmar:
         return render_template('confirmar.html',id_utilizador=id_utilizador)
+    form=InputPassword()
     utilizador=User.query.filter_by(id=id_utilizador).first()
-    try:
-        db.session.delete(utilizador)
-        db.session.commit()
-        flash(f"Conta de {utilizador.name} eliminada com sucesso!")
-    except Exception as e:
-        flash(f"Erro ao tentar apagar conta: {e}")
-        db.session.rollback()
-    return redirect(url_for('inicio'))
+    if form.validate_on_submit():
+        if utilizador.password==form.password.data:
+            try:
+                db.session.delete(utilizador)
+                db.session.commit()
+                flash(f"Conta de {utilizador.name} eliminada com sucesso!")
+            except Exception as e:
+                flash(f"Erro ao tentar apagar conta: {e}")
+                db.session.rollback()
+            return redirect(url_for('inicio'))
+        else:
+            flash("A palavra-passe está incorreta! Tenta novamente.") 
+    return render_template("login.html",form=form)
 
 
 @app.route('/teste/<int:n>/<int:m>')

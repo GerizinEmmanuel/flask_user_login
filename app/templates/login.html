@@ -5,7 +5,8 @@
         <form action="" method="POST" novalidate>
             {{form.csrf_token}}
             <div class="p-5 bg-light border rounded">
-                <h2 class="text-center">Login</h2>
+                <h2 class="text-center">{%if not current_user.is_authenticated%}Login{%else%}Digita a tua palavra-passe{%endif%}</h2>
+                {%if not current_user.is_authenticated%}
                 <div class="mb-3">
                     <label class="form-label">Username</label>
                     {{form.username(class="form-control w-auto",placeholder="O teu nome de utilizador")}}
@@ -19,6 +20,7 @@
                     </div>
                     {%endif%}
                 </div>
+                {%endif%}
                 <div class="mb-3">
                     <label class="form-label">Palavra-passe</label>
                     {{form.password(class="form-control w-auto")}}
@@ -37,7 +39,7 @@
                     {{form.remember_me}} Remember me
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn btn-primary">{%if not current_user.is_authenticated%}Entrar{%else%}Confirmar{%endif%}</button>
                 </div>
                 
             </div>

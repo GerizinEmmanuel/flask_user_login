@@ -41,6 +41,11 @@ class PasswordForm(FlaskForm):
         EqualTo('password',message='As palavras-passe devem coincidir.')
     ])
 
+class InputPassword(FlaskForm):
+    password=PasswordField('password',validators=[
+        Length(min=6,max=20,message='Digita uma palavra-passe que tenha de 6 a 20 caracteres')
+    ])
+    
 class UsernameForm(FlaskForm):
     username=StringField("username",validators=[
         DataRequired(message='É obrigatório inserir o nome de utilizador.')
