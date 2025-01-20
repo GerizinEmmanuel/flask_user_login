@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block conteudo%}
+    <div class="container d-flex align-items-center justify-content-center">
+        <form action="" method="POST">
+            {{form.csrf_token}}
+            <div class="p-5 bg-light border rounded">
+                <h4>Nome de utilizador</h4>
+                <div class="mb-3">
+                    {{form.username(class="form-control w-auto")}}
+                    {%if form.username.errors%}
+                        <div>
+                            {%for erro in form.username.errors%}
+                                <li>{{erro}}</li>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Confirmar</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    
+{%endblock%}

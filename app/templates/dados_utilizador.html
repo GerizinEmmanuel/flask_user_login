@@ -1,17 +1,32 @@
-<div class="container p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
-    <h3>Os teus dados</h3>
-    <div class="row">
-      <div class="col">
-        <p>Nome de utilizador: {{current_user.username}}</p>
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="p-5 bg-light border rounded w-auto">
+    <div class="mb-3">
+      <h4 class="">Username</h4>
+      <p>{{current_user.username}}</p>
+    </div>
+    <div class="mb-3">
+      <h4 class="">Nome</h4>
+      <p>{{current_user.name}}</p>
+    </div>
+    <div class="mb-3">
+      <h4 class="">E-mail</h4>
+      <p>{{current_user.email}}</p>
+    </div>
+    <div class="mb-3">
+      <h4>Número de telefone</h4>
+      <p>{{current_user.telefone}}</p>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="m-1">
+        <a class="btn btn-primary" href="{{url_for('atualizar_utilizador',id_utilizador=current_user.id)}}" role="button">Editar dados</a>
       </div>
-      <div class="col">
-        <p>Nome completo: {{current_user.name}}</p>
+      <div class="m-1">
+        <a class="btn btn-primary" href="{{url_for('form_otp',id_utilizador=current_user.id)}}" role="button">Alterar palavra-passe</a>
       </div>
-      <div class="col">
-        <p>E-mail: {{current_user.email}}</p>
-      </div>
-      <div class="col">
-        <p>Telefone: {{current_user.telefone}}</p>
+      <div class="m-1">
+        <a class="btn btn-danger" href="{{url_for('apagar_utilizador',id_utilizador=current_user.id,confirmar='True')}}" role="button">Apagar conta</a>
       </div>
     </div>
+    
+  </div>
 </div>

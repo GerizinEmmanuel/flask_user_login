@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+{%block conteudo%}
+
+    <div class="container d-flex justify-content-center align-items-center ">
+        <div class="p-5 bg-light border rounded">
+            <form 
+                action="{%if current_user.is_authenticated%}{{url_for('atualizar_utilizador',id_utilizador=current_user.id)}}
+                        {%else%}{{url_for('registo')}}
+                        {%endif%}" 
+                novalidate 
+                method="POST">
+                {{form.csrf_token}}
+
+                <h3>{%if current_user.is_authenticated%}Editar dados de {{current_user.name}}{%else%}Registo de utilizador{%endif%}</h3>
+            
+                <input type="hidden" name="_method" value="PUT">
+            
+                <!--Campo para introduzir nome-->
+                <div class="mb-3">
+                    <label for="input-nome" class="form-label">Nome</label>
+                    
+                    
+                    {{form.name(class="form-control",placeholder="Nome",value=current_user.name)}}
+                    
+                    {%if form.errors.name%}
+                        <div class="alert alert-danger" role="alert">
+                            {%for error in form.errors.name%}
+                                <li>{{error}}</li>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+                </div>
+                <!--Campo para introduzir e-mail-->
+                <div class="mb-3">
+                    <label for="input-email" class="form-label">E-mail</label>
+                    {{form.email(class="form-control",placeholder="E-mail",value=current_user.email)}}
+                    {%if form.errors.email%}
+                        <div class="alert alert-danger" role="alert">
+                            {%for error in form.errors.email%}
+                                <li>{{error}}</li>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+                </div>
+                <!--Campo para introduzir cell-->
+                <div class="mb-3">
+                    <label for="input-telefone" class="form-label">Número de telefone</label>
+                    {{form.telefone(id="input-telefone",class="form-control",placeholder="Telefone",value=current_user.telefone)}}
+                    {%if form.errors.telefone%}
+                        <div class="alert alert-danger" role="alert">
+                            {%for error in form.errors.telefone%}
+                                <li>{{error}}</li>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+                </div>
+                <!--Campo para introduzir username-->
+                <div class="mb-3">
+                    <label for="input-username" class="form-label">Username</label>
+                    {{form.username(class="form-control",placeholder="Username",value=current_user.username)}}
+                    {%if form.errors.username%}
+                        <div class="alert alert-danger" role="alert">
+                            {%for error in form.errors.username%}
+                                <li>{{error}}</li>
+                            {%endfor%}
+                        </div>
+                    {%endif%}
+                </div>
+                
+                <div class="mb-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+
+{%endblock%}

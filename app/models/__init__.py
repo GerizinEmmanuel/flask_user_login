@@ -9,6 +9,7 @@ class User(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(120), unique=True)
     telefone = db.Column(db.String(15))
+    auth2 = db.Column(db.Boolean)
 
     @property
     def is_authenticated(self):
@@ -25,12 +26,19 @@ class User(db.Model):
     def get_id(self):
         return str(self.id)
 
-    def __init__(self, username, password, name, email,telefone):
+    def __init__(self, username, password, name, email, telefone):
         self.username=username
         self.password=password
         self.name=name
         self.email=email
         self.telefone=telefone
+    
+    def __init__(self, username, name, email, telefone):
+        self.username=username
+        self.name=name
+        self.email=email
+        self.telefone=telefone
+        
     def __repr__(self):
         return '<User %r>' % self.username        
 

@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%block conteudo%}
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        
+            <div class="p-5 bg-light border rounded">
+                <h4>{{current_user.name}}, tens certeza de que queres 
+                    {%if id_utilizador%}apagar definitivamente a tua conta?
+                    {%else%}terminar a sessão?
+                    {%endif%}
+                </h4>
+                <div class="row mb-3 w-auto d-flex justify-content-center">
+                        <a class="btn btn-danger w-auto m-2" 
+                            href=
+                                "{%if id_utilizador%}{{url_for('apagar_utilizador',id_utilizador=id_utilizador)}}
+                                {%else%}{{url_for('logout')}}
+                                {%endif%}"
+                            >Sim</a>
+                        <a class="btn btn-primary w-auto m-2" href="{{url_for('inicio')}}">Não</a>
+                    
+                </div>               
+            </div>
+
+    </div>   
+{%endblock%}
