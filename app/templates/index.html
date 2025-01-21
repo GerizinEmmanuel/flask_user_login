@@ -5,7 +5,7 @@
 
 {%block conteudo%}
 {%if current_user.is_authenticated%}
-  <h1>Bem-vindo, {{current_user.name}}!</h1>
+  <h2>Bem-vindo, {{current_user.name}}!</h2>
   {%include 'dados_utilizador.html'%}
   
 {%else%}

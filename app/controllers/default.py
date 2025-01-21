@@ -30,7 +30,7 @@ def login():
             #return render_template("index.html",utilizador=utilizador)
         else: flash("Nome de utilizador ou palavra-passe incorreta.")
 
-    return render_template('login.html',form=form)
+    return render_template('form_login.html',form=form)
 
 @app.route("/form_otp/<int:id_utilizador>/<string:login_auto>",methods=['GET','POST'])
 @app.route("/form_otp/<int:id_utilizador>",defaults={"login_auto":None},methods=['GET','POST'])
@@ -158,7 +158,7 @@ def apagar_utilizador(id_utilizador,confirmar):
             return redirect(url_for('inicio'))
         else:
             flash("A palavra-passe está incorreta! Tenta novamente.") 
-    return render_template("login.html",form=form)
+    return render_template("form_login.html",form=form)
 
 
 @app.route('/teste/<int:n>/<int:m>')
