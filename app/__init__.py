@@ -21,6 +21,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(user_id)
 
-from app.models import User, Post, Follow
+from app.models.tables import User, Post, Follow
 from app.controllers import default
 

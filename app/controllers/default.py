@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
 from app.models.forms import LoginForm,SignupForm,EditForm,OTPForm,PasswordForm,UsernameForm,InputPassword
-from app.models import User
+from app.models.tables import User
 from app.utils.otp import gerar_codigo
 
 @app.route('/')
